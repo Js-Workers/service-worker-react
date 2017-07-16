@@ -1,1 +1,2 @@
-# service-worker-react
+# Useful links:
+* https://github.com/webpack-contrib/worker-loader
