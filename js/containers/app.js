@@ -1,12 +1,11 @@
 import React from 'react';
-import Index from '../components/index';
 import LoaderContainer from './loader';
+import MoviesListContainer from './movies-list';
 import ServiceWorker from './service-workert';
 
-const App = ({ children }) => (
+const App = () => (
   <div className="app">
-    <Index />
-    { children }
+    <MoviesListContainer />
     <LoaderContainer />
     <ServiceWorker />
   </div>

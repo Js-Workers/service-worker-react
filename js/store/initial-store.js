@@ -1,5 +1,6 @@
 const initialStore = {
-  router: {}
+  router: {},
+  movies: []
 };
 
 export default initialStore;

@@ -1,0 +1,63 @@
+.wrapper {
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  color: #000;
+  margin: 10px;
+  min-width: 280px;
+  padding: 15px;
+  text-decoration: none;
+  width: 30%;
+
+  &:hover {
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px #ddd;
+  }
+
+  @media screen and (max-width: 350px){
+    margin: 0;
+  }
+}
+
+.collection-item {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  .poster {
+    align-self: center;
+    height: 360px;
+    width: 250px;
+  }
+
+  p {
+    line-height: 20px;
+    font-size: 15px;
+  }
+
+  .movie-title {
+    font-size: 18px;
+    margin: 5px 0;
+  }
+
+  .movie-description {
+    height: 60px;
+    overflow-y: hidden;
+    text-align: left;
+    position: relative;
+    &::after {
+      content: "";
+      text-align: right;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 30%;
+      height: 1.2em;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+    }
+  }
+
+  .rating {
+    margin-top: 10px;
+  }
+}

@@ -12,7 +12,7 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, '../dist')
   },
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {
@@ -74,7 +74,7 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, '../dist'),
-    port: 3000,
+    port: 3001,
     compress: true,
     historyApiFallback: true
   }
