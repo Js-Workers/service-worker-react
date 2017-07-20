@@ -23,7 +23,8 @@ function loadMoviesRequestSucceed(movies) {
     type: REQUEST_SUCCEED,
     payload: {
       movies
-    }
+    },
+    sync: true
   };
 }
 
