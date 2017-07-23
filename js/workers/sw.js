@@ -24,19 +24,23 @@ self.addEventListener('fetch', event => {
 
   if (isExternalApi(host)) {
     event.respondWith(
-      caches.match(request)
-        .then(response => {
-          if (response) return response;
+      async function() {
+        const cacheResponse = await caches.match(request);
 
-          return fetch(request)
-            .then(fetchResponse => caches.open(CACHE_VERSION).then(cache => {
-              cache.put(request, fetchResponse.clone());
+        if (cacheResponse) return cacheResponse;
 
-              return fetchResponse;
-            }))
-            .catch(err => console.error('Fetch error', err));
-        })
-        .catch(err => console.error('Caches match error', err))
+        try {
+          const response = await fetch(request);
+          const cache = await caches.open(CACHE_VERSION);
+
+          cache.put(request, response.clone());
+
+          return response;
+
+        } catch (error) {
+          console.error('Error: ', error);
+        }
+      }()
     );
   } else {
     event.respondWith(caches.match(request));
