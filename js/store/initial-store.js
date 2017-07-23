@@ -1,5 +1,4 @@
 const initialStore = {
-  router: {},
   movies: []
 };
 

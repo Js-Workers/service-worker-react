@@ -1,17 +1,11 @@
 import React from 'react';
+import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
-import history from '../history';
-import Routes from '../containers/routes';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Routes from './routes';
 
 const Root = ({ store }) => (
   <Provider store={ store }>
-    <ConnectedRouter history={ history } >
-      <MuiThemeProvider>
-        <Routes/>
-      </MuiThemeProvider>
-    </ConnectedRouter>
+    <Router history={browserHistory} children={Routes} />
   </Provider>
 );
 

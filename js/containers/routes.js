@@ -1,11 +1,10 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import {Route, Switch} from 'react-router';
 import App from './app';
+import MoviesListContainer from './movies-list';
 
-const Routes = () => {
-  return (
-    <Route path="/" component={App}/>
-  );
-};
-
-export default Routes;
+export default (
+  <Route component={App} >
+    <Route exact={true} path="/" component={ MoviesListContainer } />
+  </Route>
+);

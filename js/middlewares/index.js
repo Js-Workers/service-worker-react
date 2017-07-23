@@ -4,4 +4,4 @@ import {logAction} from './log-action';
 export {
   sync,
   logAction
-}
+};

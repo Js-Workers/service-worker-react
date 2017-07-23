@@ -6,7 +6,7 @@ import {loadMovies} from '../actions/movies';
 import MoviesList from '../components/movies-list';
 
 class MoviesListContainer extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadMovies();
   }
 

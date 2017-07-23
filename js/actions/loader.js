@@ -2,8 +2,7 @@ import { SHOW_LOADER, HIDE_LOADER } from '../constants/loader';
 
 export {
   showLoader,
-  hideLoader,
-  showTemporary
+  hideLoader
 };
 
 function showLoader() {
@@ -17,15 +16,5 @@ function hideLoader() {
   return {
     type: HIDE_LOADER,
     payload: false
-  };
-}
-
-function showTemporary() {
-  return dispatch => {
-    dispatch(showLoader());
-    const interval = setInterval(() => {
-      dispatch(hideLoader());
-      clearInterval(interval);
-    }, 2000);
   };
 }
