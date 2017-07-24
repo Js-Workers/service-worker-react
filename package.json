@@ -18,6 +18,7 @@
   },
   "homepage": "",
   "dependencies": {
+    "dexie": "^1.5.1",
     "normalize.css": "^6.0.0",
     "prop-types": "^15.5.10",
     "query-string": "^4.3.4",

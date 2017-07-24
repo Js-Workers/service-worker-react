@@ -54,11 +54,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve('./index.html')
-    }),
-    new CopyWebpackPlugin([{
-      from: path.resolve(__dirname, '../js/workers/sw.worker.js'),
-      to: path.resolve(__dirname, '../dist/sw.worker.js')
-    }])
+    })
   ],
   resolve: {
     alias: {

@@ -1,3 +1,5 @@
+import db from '../db';
+
 export const sync = store => next => action => {
   if (!action.hasOwnProperty('sync')) {
     return next(action);
@@ -7,7 +9,13 @@ export const sync = store => next => action => {
 };
 
 function handleSync(action, store, next) {
-  console.error('do something if action has "sync" property', store);
+  const {sync} = action;
 
-  return next(action);
+  return db.cache.toArray()
+    .then(items => {
+      const result = items.find(item => item.api === sync.api);
+
+      return next({...action, payload: {movies: result.results}});
+    })
+    .catch(() => next(action))
 }

@@ -4,20 +4,38 @@ import { bindActionCreators } from 'redux';
 
 import {loadMovies} from '../actions/movies';
 import MoviesList from '../components/movies-list';
+import Button from '../components/button';
 
 class MoviesListContainer extends Component {
-  componentDidMount() {
-    this.props.loadMovies();
+  constructor() {
+    super();
+
+    this.state = {
+      movies: []
+    };
+
+    this.getMovies = this.getMovies.bind(this);
+  }
+
+  getMovies() {
+    this.props.loadMovies().then(({payload}) => {
+      this.setState({movies: payload.movies});
+    });
   }
 
   render() {
     return (
-      <MoviesList movies={this.props.movies}/>
+      <div>
+        {
+          this.state.movies.length
+            ? <MoviesList movies={this.state.movies}/>
+            : <Button title="Load Movies" onClick={this.getMovies}/>
+        }
+      </div>
     );
   }
 }
 
-const mapStateToProps = ({ movies }) => ({ movies });
 const mapActionsToProps = dispatch => bindActionCreators({loadMovies}, dispatch);
 
-export default connect(mapStateToProps, mapActionsToProps)(MoviesListContainer);
+export default connect(null, mapActionsToProps)(MoviesListContainer);

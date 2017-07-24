@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import configureStore from './store';
 import Root from './containers/root';
 import initialStore from './store/initial-store';
+import {initDb} from './db/index';
 
 import 'styles/_base.scss';
 
@@ -13,4 +14,4 @@ const renderApp = () => {
   render(<Root store={ store }/>, appContainer);
 };
 
-renderApp();
+initDb().then(renderApp);

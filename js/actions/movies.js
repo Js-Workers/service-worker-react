@@ -1,5 +1,6 @@
 import {showLoader, hideLoader} from './loader';
 import queryString from 'query-string';
+import db from '../db';
 
 export const REQUEST_STARTED = 'REQUEST_STARTED';
 export const REQUEST_SUCCEED = 'REQUEST_SUCCEED';
@@ -18,14 +19,15 @@ function loadMoviesRequestStarted() {
   };
 }
 
-function loadMoviesRequestSucceed(movies) {
-  return {
+function loadMoviesRequestSucceed(movies, offlineOptions) {
+  const obj = {
     type: REQUEST_SUCCEED,
     payload: {
       movies
-    },
-    sync: true
+    }
   };
+
+  return offlineOptions ? {...obj, ...offlineOptions} : obj;
 }
 
 function loadMoviesRequestFails(error) {
@@ -49,6 +51,7 @@ function loadMovies() {
   return dispath => {
     dispath(loadMoviesRequestStarted());
     dispath(showLoader());
+
     return fetch(api, {method: 'GET'})
       .then(response => {
         if (response.status !== 200) return Promise.reject(response);
@@ -57,13 +60,17 @@ function loadMovies() {
           .then(data => {
             dispath(hideLoader());
 
+            // TODO: store to IndexedDb response
+            db.cache.put(Object.assign({}, data, {api}));
+
             return dispath(loadMoviesRequestSucceed(data.results));
           });
       })
-      .catch(error => {
+      .catch(() => {
         dispath(hideLoader());
 
-        return error.text().then(text => dispath(loadMoviesRequestFails(text)));
+        return dispath(loadMoviesRequestSucceed(null, {sync: {api}}))
+          .catch(err => dispath(loadMoviesRequestFails(err)));
       });
   };
 }
