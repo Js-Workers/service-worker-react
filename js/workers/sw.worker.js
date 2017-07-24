@@ -39,6 +39,8 @@ self.addEventListener('fetch', event => {
 
         } catch (error) {
           console.error('Error: ', error);
+          self.request = request;
+          self.registration.sync.register('movies-loading');
         }
       }()
     );
@@ -49,6 +51,15 @@ self.addEventListener('fetch', event => {
 
 self.addEventListener('sync', event => {
   console.error('onSync', event);
+
+  switch (event.tag) {
+    case 'movies-loading':
+      return event.waitUntil(async function() {
+        const response = await fetch(self.request);
+        delete self.request;
+        return response
+      }());
+  }
 });
 
 self.addEventListener('message', event => {

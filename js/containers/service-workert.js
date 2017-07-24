@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import serviceWorker from '../../webpack/loaders/sw-loader?name=/sw.worker.js!../workers/sw.js';
+import serviceWorker from '../../webpack/loaders/sw-loader?name=/sw.worker.js!../workers/sw.worker.js';
 
 class ServiceWorker extends Component {
   componentDidMount() {

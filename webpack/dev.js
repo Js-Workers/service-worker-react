@@ -27,13 +27,6 @@ module.exports = {
             query: {
               cacheDirectory: true
             }
-          },
-          {
-            loader: 'eslint-loader',
-            query: {
-              failOnWarning: false,
-              failOnError: false
-            }
           }
         ]
       },
@@ -63,7 +56,7 @@ module.exports = {
       template: path.resolve('./index.html')
     }),
     new CopyWebpackPlugin([{
-      from: path.resolve(__dirname, '../js/workers/sw.js'),
+      from: path.resolve(__dirname, '../js/workers/sw.worker.js'),
       to: path.resolve(__dirname, '../dist/sw.worker.js')
     }])
   ],
