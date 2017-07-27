@@ -1,5 +1,7 @@
 .idea
-dist/
+dist
+with-sw/
+without-sw/
 npm-debug.log
 node_modules/
 coverage/

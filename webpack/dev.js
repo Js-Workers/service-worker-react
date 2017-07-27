@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -10,7 +9,7 @@ module.exports = {
   ],
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, '../with-sw')
   },
   devtool: 'cheap-module-eval-source-map',
   module: {
@@ -54,11 +53,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve('./index.html')
-    }),
-    new CopyWebpackPlugin([{
-      from: path.resolve(__dirname, '../js/workers/sw.worker.js'),
-      to: path.resolve(__dirname, '../dist/sw.worker.js')
-    }])
+    })
   ],
   resolve: {
     alias: {
